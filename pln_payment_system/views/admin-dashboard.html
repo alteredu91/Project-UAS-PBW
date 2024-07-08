@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">PLN Payment System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="register.html">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html" id="login-btn">Login</a>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-link nav-link" id="payment-btn">Make Payment</button>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="admin-login.html">Login Admin</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <nav class="nav justify-content-center">
+            <a href="#" class="btn btn-primary mx-2" id="view-users">View Users</a>
+            <a href="#" class="btn btn-primary mx-2" id="view-payments">View Payments</a>
+        </nav>
+        <div id="content" class="mt-4"></div>
+    </div>
+
+    <script>
+        document.getElementById('view-users').addEventListener('click', async function () {
+            const response = await fetch('/admin/users');
+            const users = await response.json();
+
+            let content = '<h2>Users</h2><table class="table table-striped"><thead><tr><th>ID</th><th>Username</th></tr></thead><tbody>';
+            users.forEach(user => {
+                content += `<tr><td>${user.id}</td><td>${user.username}</td></tr>`;
+            });
+            content += '</tbody></table>';
+
+            document.getElementById('content').innerHTML = content;
+        });
+
+        document.getElementById('view-payments').addEventListener('click', async function () {
+            const response = await fetch('/admin/payments');
+            const payments = await response.json();
+
+            let content = '<h2>Payments</h2><table class="table table-striped"><thead><tr><th>ID</th><th>User ID</th><th>Amount</th><th>Method</th><th>Transaction ID</th></tr></thead><tbody>';
+            payments.forEach(payment => {
+                content += `<tr><td>${payment.id}</td><td>${payment.user_id}</td><td>${payment.amount}</td><td>${payment.method}</td><td>${payment.transaction_id}</td></tr>`;
+            });
+            content += '</tbody></table>';
+
+            document.getElementById('content').innerHTML = content;
+        });
+    </script>
+</body>
+</html>

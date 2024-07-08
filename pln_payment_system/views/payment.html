@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Payment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">PLN Payment System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="register.html">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html" id="login-btn">Login</a>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-link nav-link" id="payment-btn">Make Payment</button>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="admin-login.html">Login Admin</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container">
+        <h1>Make Payment</h1>
+        <form id="paymentForm">
+            <div class="form-group">
+                <label for="userId">User ID:</label>
+                <input type="number" id="userId" name="userId" class="form-control" disabled>
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="method">Method:</label>
+                <select id="method" name="method" class="form-control" required>
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="Debit Card">Debit Card</option>
+                    <option value="PayPal">PayPal</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="transactionId">Transaction ID:</label>
+                <input type="text" id="transactionId" name="transactionId" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Pay</button>
+        </form>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Fetch user info
+            const userInfoResponse = await fetch('/user-info');
+            const userInfo = await userInfoResponse.json();
+            
+            if (userInfo.loggedIn) {
+                document.getElementById('userId').value = userInfo.userId;
+            } else {
+                alert('You must log in first');
+                window.location.href = 'login.html';
+            }
+        });
+
+        document.getElementById('paymentForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const formData = {
+                userId: parseInt(document.getElementById('userId').value),
+                amount: parseFloat(document.getElementById('amount').value),
+                method: document.getElementById('method').value,
+                transactionId: document.getElementById('transactionId').value
+            };
+
+            try {
+                const response = await fetch('/payments', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    document.getElementById('message').textContent = 'Payment successful!';
+                    document.getElementById('message').classList.add('alert', 'alert-success');
+                } else {
+                    const errorText = await response.text();
+                    document.getElementById('message').textContent = 'Payment failed: ' + errorText;
+                    document.getElementById('message').classList.add('alert', 'alert-danger');
+                }
+            } catch (error) {
+                document.getElementById('message').textContent = 'Payment failed: ' + error.message;
+                document.getElementById('message').classList.add('alert', 'alert-danger');
+            }
+        });
+    </script>
+</body>
+</html>
