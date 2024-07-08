@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLN Payment System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-color: white;
+        }
+        .navbar {
+            background-color: #007bff;
+        }
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+        .nav-link:hover {
+            color: #ffc107 !important;
+        }
+        .hero {
+            position: relative;
+            height: 70vh;
+            background: url('https://web.pln.co.id/statics/uploads/2023/10/web-banner-hln78.png') no-repeat center center;
+            background-size: cover;
+        }
+        .hero .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .hero .overlay h1 {
+            color: white;
+            font-size: 3.5rem;
+        }
+        .hero .overlay p {
+            color: white;
+            font-size: 1.2rem;
+        }
+        .hero .overlay a {
+            margin-top: 1rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="https://img.freepik.com/premium-vector/logo-pln-vector_588787-75.jpg?w=740" alt="PLN Logo" width="30" height="30" class="d-inline-block align-top">
+                PLN Payment System
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.html">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html" id="login-btn">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-link nav-link" id="payment-btn">Make Payment</button>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin-login.html">Login Admin</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="overlay">
+            <div>
+                <h1>Welcome to PLN Payment System</h1>
+                <p class="lead" id="user-info"></p>
+                <hr class="my-4">
+                <p>Manage your payments effortlessly and securely.</p>
+                <a class="btn btn-primary btn-lg mt-3" href="register.html" role="button">Get Started</a>
+            </div>
+        </div>
+    </div>
+    <!-- End Hero Section -->
+
+    <!-- Information Section -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>About PLN</h2>
+                <p>PLN (Perusahaan Listrik Negara) is the state electricity company of Indonesia. We are committed to providing reliable and sustainable energy to our customers. Our services include new connections, power adjustments, and temporary connections. We are continuously expanding and improving our services to meet the growing demand for electricity in Indonesia.</p>
+            </div>
+            <div class="col-md-6">
+                <img src="https://web.pln.co.id/statics/uploads/2023/10/web-banner-hln78.png" class="img-fluid" alt="PLN Banner">
+            </div>
+        </div>
+    </div>
+    <!-- End Information Section -->
+
+    <!-- Latest News Section -->
+    <div class="container mt-5">
+        <h2 class="text-center">Latest News from PLN</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://web.pln.co.id/statics/uploads/2024/07/WhatsApp-Image-2024-07-06-at-23.05.16-768x512.jpeg" class="card-img-top" alt="News Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Jakarta Electric PLN Wins Final Four</h5>
+                        <p class="card-text">Jakarta Electric PLN secured a victory in the Final Four of Proliga 2024, beating Pertamina Enduro 3-1. The team has shown great performance and resilience.</p>
+                        <a href="https://web.pln.co.id/media/siaran-pers/2024/07/kembali-ke-jalur-kemenangan-jakarta-electric-pln-tekuk-pertamina-enduro-3-1-di-final-four-proliga-2024" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://web.pln.co.id/statics/uploads/2024/07/WhatsApp-Image-2024-07-05-at-19.38.32-300x250.jpeg" class="card-img-top" alt="News Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Proliga 2024 Tickets Sold Out</h5>
+                        <p class="card-text">Tickets for the Final Four of Proliga 2024 were sold out quickly due to high demand and attractive promotions available through the PLN Mobile app.</p>
+                        <a href="https://web.pln.co.id/media/siaran-pers/2024/07/mudah-dan-banyak-promo-tiket-final-four-proliga-2024-di-aplikasi-pln-mobile-ludes-terjual" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://web.pln.co.id/statics/uploads/2024/07/WhatsApp-Image-2024-07-05-at-16.22.31-300x250.jpeg" class="card-img-top" alt="News Image">
+                    <div class="card-body">
+                        <h5 class="card-title">PLN Provides Green Electricity</h5>
+                        <p class="card-text">PLN is supplying 8,978 MWh of green electricity to Uniqlo Indonesia through the Renewable Energy Certificate (REC) program, supporting sustainable energy initiatives.</p>
+                        <a href="https://web.pln.co.id/media/siaran-pers/2024/07/gunakan-layanan-rec-pln-pasok-listrik-hijau-8-978-mwh-untuk-uniqlo-indonesia" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Latest News Section -->
+
+    <footer class="bg-light py-3 mt-5">
+        <div class="container text-center">
+            <span class="text-muted">© 2024 PLN Payment System. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/user-info')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.loggedIn) {
+                        document.getElementById('user-info').textContent = 'Welcome, ' + data.username;
+                        document.getElementById('login-btn').textContent = 'Logout';
+                        document.getElementById('login-btn').onclick = function () {
+                            fetch('/logout', {
+                                method: 'POST'
+                            }).then(() => {
+                                window.location.href = 'index.html';
+                            });
+                        };
+                        document.getElementById('payment-btn').onclick = function () {
+                            window.location.href = 'payment.html';
+                        };
+                    } else {
+                        document.getElementById('user-info').textContent = 'Not logged in';
+                        document.getElementById('login-btn').textContent = 'Login';
+                        document.getElementById('login-btn').href = 'login.html';
+                        document.getElementById('payment-btn').onclick = function () {
+                            alert('You must log in first');
+                        };
+                    }
+                });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
