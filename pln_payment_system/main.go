@@ -1,14 +1,13 @@
 package main
 
 import (
-	"database/sql"
-	"log"
-	"net/http"
-	"pln_payment_system/controllers"
-
-	_ "github.com/go-sql-driver/mysql"
-	"github.com/gorilla/mux"
-	"github.com/gorilla/sessions"
+    "database/sql"
+    "log"
+    "net/http"
+    _ "github.com/go-sql-driver/mysql"
+    "github.com/gorilla/mux"
+    "github.com/gorilla/sessions"
+    "pln_payment_system/controllers"
 )
 
 var store = sessions.NewCookieStore([]byte("secret-key"))
@@ -26,6 +25,7 @@ func main() {
     // Controllers
     userController := controllers.NewUserController(db, store)
     paymentController := controllers.NewPaymentController(db, store)
+    adminController := controllers.NewAdminController(db, store) // Added AdminController
 
     router.HandleFunc("/register", userController.Register).Methods("POST")
     router.HandleFunc("/login", userController.Login).Methods("POST")
@@ -36,6 +36,10 @@ func main() {
     router.HandleFunc("/payments", paymentController.Create).Methods("POST")
     router.HandleFunc("/payments/{id}", paymentController.Update).Methods("PUT")
     router.HandleFunc("/payments/{id}", paymentController.Delete).Methods("DELETE")
+
+    // Admin routes
+    router.HandleFunc("/admin/users", adminController.IndexUsers).Methods("GET")
+    router.HandleFunc("/admin/payments", adminController.IndexPayments).Methods("GET")
 
     // Static files
     router.PathPrefix("/").Handler(http.FileServer(http.Dir("./views/")))
